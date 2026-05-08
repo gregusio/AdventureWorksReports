@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AdventureWorksReports.Legacy/AdventureWorksReports.Legacy.csproj" Id="ecab8e6c-96ae-413f-9404-6f0fac44b2c6" />
+    <Project Path="src/AdventureWorksReports.Modern/AdventureWorksReports.Modern.csproj" />
+  </Folder>
+</Solution>
