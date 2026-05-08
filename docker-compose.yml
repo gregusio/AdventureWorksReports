@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    build: .
+    container_name: adventureworks_db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=SuperTajneHaslo123!
+    ports:
+      - "1433:1433"
