@@ -1,0 +1,25 @@
+using AdventureWorksReports.Modern.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace AdventureWorksReports.Modern.Data;
+
+public class AdventureWorksContext : DbContext
+{
+    public AdventureWorksContext(DbContextOptions<AdventureWorksContext> options) 
+        : base(options) { }
+
+    public DbSet<SalesOrderHeader> SalesOrderHeaders { get; set; }
+    public DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<ProductSubcategory> ProductSubcategories { get; set; }
+    public DbSet<ProductCategory> ProductCategories { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<SalesOrderHeader>().HasKey(e => e.SalesOrderID);
+        modelBuilder.Entity<SalesOrderDetail>().HasKey(e => e.SalesOrderDetailID);
+        modelBuilder.Entity<Product>().HasKey(e => e.ProductID);
+        modelBuilder.Entity<ProductSubcategory>().HasKey(e => e.ProductSubcategoryID);
+        modelBuilder.Entity<ProductCategory>().HasKey(e => e.ProductCategoryID);
+    }
+}
