@@ -13,6 +13,8 @@ public class AdventureWorksContext : DbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductSubcategory> ProductSubcategories { get; set; }
     public DbSet<ProductCategory> ProductCategories { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Person> Persons { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -21,5 +23,7 @@ public class AdventureWorksContext : DbContext
         modelBuilder.Entity<Product>().HasKey(e => e.ProductID);
         modelBuilder.Entity<ProductSubcategory>().HasKey(e => e.ProductSubcategoryID);
         modelBuilder.Entity<ProductCategory>().HasKey(e => e.ProductCategoryID);
+        modelBuilder.Entity<Customer>().HasKey(e => e.CustomerID);
+        modelBuilder.Entity<Person>().HasKey(e => e.BusinessEntityID);
     }
 }

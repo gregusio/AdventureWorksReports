@@ -44,4 +44,40 @@ public class ReportsController : ControllerBase
 
         return Ok(report);
     }
+
+    [HttpGet("customer-history")]
+    public async Task<IActionResult> GetCustomerHistory()
+    {
+        var report = await _context.SalesOrderHeaders
+            .SelectMany(header => header.SalesOrderDetails)
+            .GroupBy(detail => new 
+            {
+                detail.SalesOrderHeader.CustomerID,
+                detail.SalesOrderHeader.Customer.Person.FirstName,
+                detail.SalesOrderHeader.Customer.Person.LastName
+            })
+            .Select(group => new CustomerHistoryDto
+            {
+                CustomerId = group.Key.CustomerID ?? 0,
+                FirstName = group.Key.FirstName,
+                LastName = group.Key.LastName,
+                TotalPurchases = group.Sum(x => x.LineTotal),
+                Orders = group.Select(detail => new OrderDto
+                {
+                    OrderId = detail.SalesOrderHeader.SalesOrderID,
+                    OrderDate = detail.SalesOrderHeader.OrderDate,
+                    TotalAmount = detail.LineTotal
+                })
+                .ToList()
+            })
+            .OrderByDescending(dto => dto.TotalPurchases)
+            .ThenBy(dto => dto.FirstName)
+            .ThenBy(dto => dto.LastName)
+            .AsNoTracking()
+            .Take(100)
+            .ToListAsync();
+
+        return Ok(report);
+    }
 }
+    

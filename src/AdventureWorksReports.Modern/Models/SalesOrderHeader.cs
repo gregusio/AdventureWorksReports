@@ -9,4 +9,8 @@ public class SalesOrderHeader
     public DateTime OrderDate { get; set; }
     
     public ICollection<SalesOrderDetail> SalesOrderDetails { get; set; }
+    public int? CustomerID { get; set; }
+    
+    [ForeignKey(nameof(CustomerID))]
+    public Customer Customer { get; set; }
 }
