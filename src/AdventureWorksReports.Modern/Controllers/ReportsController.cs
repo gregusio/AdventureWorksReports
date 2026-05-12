@@ -19,11 +19,11 @@ public class ReportsController : ControllerBase
     [HttpGet("monthly-profit")]
     public async Task<IActionResult> GetMonthlyProfit()
     {
-        DateTime startDate = new DateTime(2011, 1, 1); 
+        DateTime startDate = new DateTime(2011, 1, 1);
 
         var report = await _context.SalesOrderDetails
             .Where(detail => detail.SalesOrderHeader.OrderDate >= startDate)
-            .GroupBy(detail => new 
+            .GroupBy(detail => new
             {
                 Year = detail.SalesOrderHeader.OrderDate.Year,
                 Month = detail.SalesOrderHeader.OrderDate.Month,
@@ -50,7 +50,7 @@ public class ReportsController : ControllerBase
     {
         var report = await _context.SalesOrderHeaders
             .SelectMany(header => header.SalesOrderDetails)
-            .GroupBy(detail => new 
+            .GroupBy(detail => new
             {
                 detail.SalesOrderHeader.CustomerID,
                 detail.SalesOrderHeader.Customer.Person.FirstName,
@@ -79,5 +79,32 @@ public class ReportsController : ControllerBase
 
         return Ok(report);
     }
+
+    [HttpGet("inventory-csv")]
+    public async Task ExportInventoryCsv()
+    {
+        Response.ContentType = "text/csv";
+        Response.Headers.Append("Content-Disposition", "attachment; filename=\"inventory.csv\"");
+
+        await using var writer = new StreamWriter(Response.Body);
+
+        await writer.WriteLineAsync("ProductName,LocationName,Quantity");
+
+        var inventoryStream = _context.ProductInventories
+            .Select(pi => new
+            {
+                ProductName = pi.Product.Name,
+                LocationName = pi.Location.Name,
+                Quantity = pi.Quantity
+            })
+            .AsNoTracking()
+            .AsAsyncEnumerable();
+
+        await foreach (var row in inventoryStream)
+        {
+            var cleanName = row.ProductName.Replace(",", "");
+
+            await writer.WriteLineAsync($"{cleanName},{row.LocationName},{row.Quantity}");
+        }
+    }
 }
-    
