@@ -1,4 +1,12 @@
+using AdventureWorksReports.Modern.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = builder.Configuration;
+var connectionString = configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AdventureWorksContext>(options =>
+    options.UseSqlServer(connectionString));
 
 // Add services to the container.
 
