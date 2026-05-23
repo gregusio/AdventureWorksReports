@@ -1,0 +1,6 @@
+@AdventureWorksReports.Modern_HostAddress = http://localhost:5041
+
+
+Accept: application/json
+
+###
