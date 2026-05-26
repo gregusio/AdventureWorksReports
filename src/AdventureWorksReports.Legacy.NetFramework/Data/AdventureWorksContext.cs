@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
-using AdventureWorksReports.Legacy.Models;
+using AdventureWorksReports.Legacy.NetFramework.Models;
 
-namespace AdventureWorksReports.Legacy.Data
+namespace AdventureWorksReports.Legacy.NetFramework.Data
 {
     public class AdventureWorksContext : DbContext
     {

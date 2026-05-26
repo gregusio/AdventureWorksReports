@@ -1,4 +1,4 @@
-namespace AdventureWorksReports.Modern.Models.DTOs;
+namespace AdventureWorksReports.Modern.Net8.Minimal.Models.DTOs;
 
 public record CustomerHistoryDto
 {

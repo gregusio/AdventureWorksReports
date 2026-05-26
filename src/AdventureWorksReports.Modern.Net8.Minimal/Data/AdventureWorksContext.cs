@@ -1,7 +1,7 @@
-using AdventureWorksReports.Modern.Models;
+using AdventureWorksReports.Modern.Net8.Minimal.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AdventureWorksReports.Modern.Data;
+namespace AdventureWorksReports.Modern.Net8.Minimal.Data;
 
 public class AdventureWorksContext : DbContext
 {

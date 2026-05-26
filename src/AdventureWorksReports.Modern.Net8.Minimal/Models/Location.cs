@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AdventureWorksReports.Modern.Models;
+namespace AdventureWorksReports.Modern.Net8.Minimal.Models;
 
 [Table("Location", Schema = "Production")]
 public class Location

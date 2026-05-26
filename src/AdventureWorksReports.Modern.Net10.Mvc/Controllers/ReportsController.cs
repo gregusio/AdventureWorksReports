@@ -1,9 +1,9 @@
-using AdventureWorksReports.Modern.Data;
-using AdventureWorksReports.Modern.Models.DTOs;
+using AdventureWorksReports.Modern.Net10.Mvc.Data;
+using AdventureWorksReports.Modern.Net10.Mvc.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace AdventureWorksReports.Modern.Controllers;
+namespace AdventureWorksReports.Modern.Net10.Mvc.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

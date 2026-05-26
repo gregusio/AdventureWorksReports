@@ -1,4 +1,4 @@
-using AdventureWorksReports.Modern.Data;
+using AdventureWorksReports.Modern.Net8.Minimal.Data;
 using AdventureWorksReports.Modern.Net8.Minimal.Endpoints;
 using Microsoft.EntityFrameworkCore;
 

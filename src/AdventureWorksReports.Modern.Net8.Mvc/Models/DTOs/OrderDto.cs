@@ -1,4 +1,4 @@
-namespace AdventureWorksReports.Modern.Models.DTOs;
+namespace AdventureWorksReports.Modern.Net8.Mvc.Models.DTOs;
 
 public record OrderDto
 {

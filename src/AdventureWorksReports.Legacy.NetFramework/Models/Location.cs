@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace AdventureWorksReports.Legacy.Models
+namespace AdventureWorksReports.Legacy.NetFramework.Models
 {
     [Table("Location", Schema = "Production")]
     public class Location

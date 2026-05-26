@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="AdventureWorksReports.Legacy.WebApiApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="AdventureWorksReports.Legacy.NetFramework.WebApiApplication" Language="C#" %>

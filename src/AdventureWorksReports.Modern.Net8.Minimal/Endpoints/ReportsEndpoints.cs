@@ -1,5 +1,5 @@
-using AdventureWorksReports.Modern.Data;
-using AdventureWorksReports.Modern.Models.DTOs;
+using AdventureWorksReports.Modern.Net8.Minimal.Data;
+using AdventureWorksReports.Modern.Net8.Minimal.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdventureWorksReports.Modern.Net8.Minimal.Endpoints;

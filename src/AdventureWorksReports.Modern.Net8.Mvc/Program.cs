@@ -1,4 +1,4 @@
-using AdventureWorksReports.Modern.Data;
+using AdventureWorksReports.Modern.Net8.Mvc.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

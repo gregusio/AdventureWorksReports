@@ -1,5 +1,5 @@
-﻿using AdventureWorksReports.Legacy.Data;
-using AdventureWorksReports.Legacy.Models.DTOs;
+﻿using AdventureWorksReports.Legacy.NetFramework.Data;
+using AdventureWorksReports.Legacy.NetFramework.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,7 +11,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace AdventureWorksReports.Legacy.Controllers
+namespace AdventureWorksReports.Legacy.NetFramework.Controllers
 {
     [RoutePrefix("api/reports")]
     public class ReportsController : ApiController

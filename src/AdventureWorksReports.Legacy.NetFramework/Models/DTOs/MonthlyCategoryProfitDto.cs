@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace AdventureWorksReports.Legacy.Models.DTOs
+namespace AdventureWorksReports.Legacy.NetFramework.Models.DTOs
 {
     public class MonthlyCategoryProfitDto
     {

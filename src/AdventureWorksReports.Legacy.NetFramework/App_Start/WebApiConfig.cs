@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace AdventureWorksReports.Legacy
+namespace AdventureWorksReports.Legacy.NetFramework
 {
     public static class WebApiConfig
     {

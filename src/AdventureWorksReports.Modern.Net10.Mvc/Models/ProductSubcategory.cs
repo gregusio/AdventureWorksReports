@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AdventureWorksReports.Modern.Models;
+namespace AdventureWorksReports.Modern.Net10.Mvc.Models;
 
 [Table("ProductSubcategory", Schema = "Production")]
 public class ProductSubcategory
