@@ -21,6 +21,7 @@ namespace AdventureWorksReports.Legacy.NetFramework.Data
         public DbSet<Person> Persons { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<ProductInventory> ProductInventories { get; set; }
+        public DbSet<ProductReview> ProductReviews { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -36,6 +37,7 @@ namespace AdventureWorksReports.Legacy.NetFramework.Data
             modelBuilder.Entity<Person>().HasKey(e => e.BusinessEntityID);
             modelBuilder.Entity<Location>().HasKey(e => e.LocationId);
             modelBuilder.Entity<ProductInventory>().HasKey(e => new { e.ProductId, e.LocationId });
+            modelBuilder.Entity<ProductReview>().HasKey(e => e.ProductReviewID);
         }
     }
 }

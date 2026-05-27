@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Data\AdventureWorksContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -106,11 +107,13 @@
     <Compile Include="Models\DTOs\InventoryCsv.cs" />
     <Compile Include="Models\DTOs\MonthlyCategoryProfitDto.cs" />
     <Compile Include="Models\DTOs\OrderDto.cs" />
+    <Compile Include="Models\DTOs\ProductReviewDto.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\ProductInventory.cs" />
+    <Compile Include="Models\ProductReview.cs" />
     <Compile Include="Models\ProductSubcategory.cs" />
     <Compile Include="Models\SalesOrderDetail.cs" />
     <Compile Include="Models\SalesOrderHeader.cs" />
@@ -118,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="testy.http" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
