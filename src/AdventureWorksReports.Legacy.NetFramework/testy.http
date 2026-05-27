@@ -1,0 +1,19 @@
+POST https://localhost:63333/api/reviews/bulk
+Content-Type: application/json
+
+[
+  {
+    "productId": 776,
+    "reviewerName": "Jan Kowalski",
+    "email": "jan.kowalski@example.com",
+    "rating": 5,
+    "comments": "Rower sprawuje się wyśmienicie na górskich trasach."
+  },
+  {
+    "productId": 777,
+    "reviewerName": "Anna Nowak",
+    "email": "anna.nowak@example.com",
+    "rating": 4,
+    "comments": "Świetny sprzęt, choć siodełko mogłoby być nieco wygodniejsze."
+  }
+]

@@ -29,5 +29,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapReportsEndpoints();
+app.MapReviewsEndpoints();
 
 app.Run();

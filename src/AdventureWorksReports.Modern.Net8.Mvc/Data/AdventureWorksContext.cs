@@ -17,6 +17,7 @@ public class AdventureWorksContext : DbContext
     public DbSet<Person> Persons { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<ProductInventory> ProductInventories { get; set; }
+    public DbSet<ProductReview> ProductReviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,5 +33,6 @@ public class AdventureWorksContext : DbContext
         modelBuilder.Entity<Person>().HasKey(e => e.BusinessEntityID);
         modelBuilder.Entity<Location>().HasKey(e => e.LocationId);
         modelBuilder.Entity<ProductInventory>().HasKey(e => new { e.ProductId, e.LocationId });
+        modelBuilder.Entity<ProductReview>().HasKey(e => e.ProductReviewID);
     }
 }
