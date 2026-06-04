@@ -1,6 +1,7 @@
 ﻿using AdventureWorksReports.Modern.Net8.Minimal.Data;
 using AdventureWorksReports.Modern.Net8.Minimal.Models;
 using AdventureWorksReports.Modern.Net8.Minimal.Models.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdventureWorksReports.Modern.Net8.Minimal.Endpoints;
 
@@ -31,6 +32,15 @@ public static class ReviewsEndpoints
             await context.SaveChangesAsync();
 
             return Results.Created("/api/reviews/bulk", newReviews.Count);
+        });
+
+        group.MapDelete("/delete-bulk", async (AdventureWorksContext context) =>
+        {
+            string sqlCommand = "DELETE FROM Production.ProductReview WHERE Comments = 'JMeterLoadTest'";
+
+            int deletedCount = await context.Database.ExecuteSqlRawAsync(sqlCommand);
+
+            return Results.Ok(new { Deleted = deletedCount, Message = "Success" });
         });
     }
 }

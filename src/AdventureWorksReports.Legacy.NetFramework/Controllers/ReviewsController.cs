@@ -39,6 +39,19 @@ namespace AdventureWorksReports.Legacy.NetFramework.Controllers
 
             return Content(HttpStatusCode.Created, newReviews.Count);
         }
-    }
 
+        [HttpDelete]
+        [Route("delete-bulk")]
+        public async Task<IHttpActionResult> ClearTestData()
+        {
+            using (var db = new AdventureWorksContext()) // Podmień na nazwę Twojego DbContextu
+            {
+                string sqlCommand = "DELETE FROM Production.ProductReview WHERE Comments = 'JMeterLoadTest'";
+
+                int deletedCount = await db.Database.ExecuteSqlCommandAsync(sqlCommand);
+
+                return Ok(new { Deleted = deletedCount, Message = "Success" });
+            }
+        }
+    }
 }

@@ -2,6 +2,7 @@ using AdventureWorksReports.Modern.Net10.Mvc.Data;
 using AdventureWorksReports.Modern.Net10.Mvc.Models;
 using AdventureWorksReports.Modern.Net10.Mvc.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdventureWorksReports.Modern.Net10.Mvc.Controllers;
 
@@ -38,5 +39,15 @@ public class ReviewsController : ControllerBase
         await _context.SaveChangesAsync();
 
         return Created("/api/reviews/bulk", newReviews.Count);
+    }
+
+    [HttpDelete("delete-bulk")]
+    public async Task<IActionResult> ClearTestData()
+    {
+        string sqlCommand = "DELETE FROM Production.ProductReview WHERE Comments = 'JMeterLoadTest'";
+
+        int deletedCount = await _context.Database.ExecuteSqlRawAsync(sqlCommand);
+
+        return Ok(new { Deleted = deletedCount, Message = "Success" });
     }
 }
