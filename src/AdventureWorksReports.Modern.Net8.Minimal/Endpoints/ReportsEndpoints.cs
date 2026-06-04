@@ -12,7 +12,7 @@ public static class ReportsEndpoints
 
         group.MapGet("/monthly-profit", async (AdventureWorksContext context) =>
         {
-            DateTime startDate = new DateTime(2011, 1, 1);
+            DateTime startDate = new DateTime(2013, 1, 1);
 
             var report = await context.SalesOrderDetails
                 .Where(detail => detail.SalesOrderHeader.OrderDate >= startDate)
@@ -66,7 +66,7 @@ public static class ReportsEndpoints
             .ThenBy(dto => dto.FirstName)
             .ThenBy(dto => dto.LastName)
             .AsNoTracking()
-            .Take(100)
+            .Take(10_000)
             .ToListAsync();
 
             return Results.Ok(report);

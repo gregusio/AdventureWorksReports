@@ -22,7 +22,7 @@ namespace AdventureWorksReports.Legacy.NetFramework.Controllers
         [Route("monthly-profit")]
         public async Task<IHttpActionResult> GetMonthlyProfit()
         {
-            DateTime startDate = new DateTime(2011, 1, 1);
+            DateTime startDate = new DateTime(2013, 1, 1);
 
             var report = await _context.SalesOrderDetails
                 .Where(detail => detail.SalesOrderHeader.OrderDate >= startDate)
@@ -78,7 +78,7 @@ namespace AdventureWorksReports.Legacy.NetFramework.Controllers
             .ThenBy(dto => dto.FirstName)
             .ThenBy(dto => dto.LastName)
             .AsNoTracking()
-            .Take(100)
+            .Take(10_000)
             .ToListAsync();
 
             return Ok(report);
