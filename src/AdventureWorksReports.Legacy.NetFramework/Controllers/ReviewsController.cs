@@ -34,8 +34,8 @@ namespace AdventureWorksReports.Legacy.NetFramework.Controllers
                     Comments = review.Comments
                 }).ToList();
 
-                _context.ProductReviews.AddRange(newReviews);
-                await _context.SaveChangesAsync();
+                db.ProductReviews.AddRange(newReviews);
+                await db.SaveChangesAsync();
 
                 return Content(HttpStatusCode.Created, newReviews.Count);
             }
