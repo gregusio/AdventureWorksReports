@@ -36,7 +36,7 @@ public static class ReviewsEndpoints
 
         group.MapDelete("/delete-bulk", async (AdventureWorksContext context) =>
         {
-            string sqlCommand = "DELETE FROM Production.ProductReview WHERE Comments = 'JMeterLoadTest'";
+            string sqlCommand = "TRUNCATE TABLE Production.ProductReview";
 
             int deletedCount = await context.Database.ExecuteSqlRawAsync(sqlCommand);
 

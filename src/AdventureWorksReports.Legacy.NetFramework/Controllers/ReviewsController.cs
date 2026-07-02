@@ -47,7 +47,7 @@ namespace AdventureWorksReports.Legacy.NetFramework.Controllers
         {
             using (var db = new AdventureWorksContext()) // Podmień na nazwę Twojego DbContextu
             {
-                string sqlCommand = "DELETE FROM Production.ProductReview WHERE Comments = 'JMeterLoadTest'";
+                string sqlCommand = "TRUNCATE TABLE Production.ProductReview";
 
                 int deletedCount = await db.Database.ExecuteSqlCommandAsync(sqlCommand);
 

@@ -44,7 +44,7 @@ public class ReviewsController : ControllerBase
     [HttpDelete("delete-bulk")]
     public async Task<IActionResult> ClearTestData()
     {
-        string sqlCommand = "DELETE FROM Production.ProductReview WHERE Comments = 'JMeterLoadTest'";
+        string sqlCommand = "TRUNCATE TABLE Production.ProductReview";
 
         int deletedCount = await _context.Database.ExecuteSqlRawAsync(sqlCommand);
 
