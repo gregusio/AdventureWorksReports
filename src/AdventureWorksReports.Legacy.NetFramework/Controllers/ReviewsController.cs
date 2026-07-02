@@ -13,31 +13,32 @@ namespace AdventureWorksReports.Legacy.NetFramework.Controllers
     [RoutePrefix("api/reviews")]
     public class ReviewsController : ApiController
     {
-        private readonly AdventureWorksContext _context = new AdventureWorksContext();
-
         [HttpPost]
         [Route("bulk")]
         public async Task<IHttpActionResult> BulkInsertReviews([FromBody] List<ProductReviewDto> reviews)
         {
-            if (reviews == null || reviews.Count == 0)
+            using (var db = new AdventureWorksContext())
             {
-                return BadRequest("No reviews provided.");
+                if (reviews == null || reviews.Count == 0)
+                {
+                    return BadRequest("No reviews provided.");
+                }
+
+                var newReviews = reviews.Select(review => new ProductReview
+                {
+                    ProductID = review.ProductID,
+                    ReviewerName = review.ReviewerName,
+                    EmailAddress = review.EmailAddress,
+                    ReviewDate = DateTime.Now,
+                    Rating = review.Rating,
+                    Comments = review.Comments
+                }).ToList();
+
+                _context.ProductReviews.AddRange(newReviews);
+                await _context.SaveChangesAsync();
+
+                return Content(HttpStatusCode.Created, newReviews.Count);
             }
-
-            var newReviews = reviews.Select(review => new ProductReview
-            {
-                ProductID = review.ProductID,
-                ReviewerName = review.ReviewerName,
-                EmailAddress = review.EmailAddress,
-                ReviewDate = DateTime.Now,
-                Rating = review.Rating,
-                Comments = review.Comments
-            }).ToList();
-
-            _context.ProductReviews.AddRange(newReviews);
-            await _context.SaveChangesAsync();
-
-            return Content(HttpStatusCode.Created, newReviews.Count);
         }
 
         [HttpDelete]
