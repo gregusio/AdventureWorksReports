@@ -2,7 +2,9 @@
 using AdventureWorksReports.Legacy.NetFramework.Models.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -96,25 +98,26 @@ namespace AdventureWorksReports.Legacy.NetFramework.Controllers
 
             response.Content = new PushStreamContent(async (outputStream, httpContent, transportContext) =>
             {
-                using (var db = new AdventureWorksContext())
+                using (var writer = new StreamWriter(outputStream))
+                using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["AdventureWorksConnection"].ConnectionString))
+                using (var command = new SqlCommand(@"
+                    SELECT p.Name, l.Name, pi.Quantity
+                    FROM Production.ProductInventory pi
+                    JOIN Production.Product p ON pi.ProductID = p.ProductID
+                    JOIN Production.Location l ON pi.LocationID = l.LocationID", connection))
                 {
-                    using (var writer = new StreamWriter(outputStream))
+                    await connection.OpenAsync();
+                    await writer.WriteLineAsync("ProductName,LocationName,Quantity");
+
+                    using (var reader = await command.ExecuteReaderAsync())
                     {
-                        await writer.WriteLineAsync("ProductName,LocationName,Quantity");
-
-                        var query = db.ProductInventories
-                            .Select(pi => new
-                            {
-                                ProductName = pi.Product.Name,
-                                LocationName = pi.Location.Name,
-                                Quantity = pi.Quantity
-                            })
-                            .AsNoTracking();
-
-                        foreach (var row in query)
+                        while (await reader.ReadAsync())
                         {
-                            var cleanName = row.ProductName != null ? row.ProductName.Replace(",", "") : "";
-                            await writer.WriteLineAsync($"{cleanName},{row.LocationName},{row.Quantity}");
+                            var name = reader.GetString(0).Replace(",", "");
+                            var location = reader.GetString(1);
+                            var quantity = reader.GetValue(2).ToString();
+
+                            await writer.WriteLineAsync($"{name},{location},{quantity}");
                         }
                     }
                 }
