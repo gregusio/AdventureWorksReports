@@ -107,4 +107,10 @@ public class ReportsController : ControllerBase
             await writer.WriteLineAsync($"{cleanName},{row.LocationName},{row.Quantity}");
         }
     }
+
+    [HttpGet("ok")]
+    public IActionResult GetOk()
+    {
+        return Ok("OK");
+    }
 }

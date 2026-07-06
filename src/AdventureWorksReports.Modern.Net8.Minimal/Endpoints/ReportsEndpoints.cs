@@ -98,5 +98,7 @@ public static class ReportsEndpoints
                 await writer.WriteLineAsync($"{cleanName},{row.LocationName},{row.Quantity}");
             }
         });
+
+        group.MapGet("/ok", () => "OK");
     }
 }
