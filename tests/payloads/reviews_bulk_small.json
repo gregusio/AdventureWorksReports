@@ -1,0 +1,23 @@
+[
+  {
+    "productId": 709,
+    "reviewerName": "Jan Kowalski",
+    "emailAddress": "jan.kowalski@example.com",
+    "rating": 5,
+    "comments": "JMeterLoadTest"
+  },
+  {
+    "productId": 710,
+    "reviewerName": "Anna Nowak",
+    "emailAddress": "anna.nowak@example.com",
+    "rating": 4,
+    "comments": "JMeterLoadTest"
+  },
+  {
+    "productId": 711,
+    "reviewerName": "Piotr Wiśniewski",
+    "emailAddress": "piotr.w@example.com",
+    "rating": 3,
+    "comments": "JMeterLoadTest"
+  }
+]
