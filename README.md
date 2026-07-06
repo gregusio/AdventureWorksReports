@@ -4,7 +4,7 @@ This repository contains the complete source code, test scripts (Apache JMeter),
 used to evaluate throughput and resource utilization during the migration of applications from the 
 .NET Framework (IIS) to the .NET 8/10 (Kestrel) platform.
 
-## 🛠 Prerequisites
+## Prerequisites
 
 To run the tests successfully, the environment must meet the following requirements:
 * **Operating System:** Windows 10/11 (required due to the IIS server and PerfMon mechanism).
@@ -15,8 +15,6 @@ To run the tests successfully, the environment must meet the following requireme
 ```bash
 pip install pandas
 ```
-
----
 
 ## Step 1: Environment and Data Preparation
 
@@ -38,8 +36,6 @@ Navigate to the `tests/payloads` folder and generate the JSON files used for POS
 cd tests/payloads
 python generate.py
 ```
-
----
 
 ## Step 2: Running Tests
 
@@ -73,8 +69,6 @@ If JMeter is installed elsewhere, pass the `-JMeterPath` parameter:
 ```
 
 The raw `.csv` results will be automatically generated in the `tests/results/<ScenarioName>` folder.
-
----
 
 ## Step 3: Result Analysis
 
@@ -114,5 +108,3 @@ python generate_ping_monits.py
 ```
 
 All outputs for the Ping scenario will also be saved in the corresponding `analysis/processed/` directory.
-
-
