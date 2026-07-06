@@ -184,8 +184,8 @@ foreach ($profile in $profiles) {
                 "-JhttpMethod=$($endpoint.Method)",
                 "-JpayloadFile=$activePayload",
                 "-Jusers=$($profile.VUsers)",
-                "-Jrampup=$($profile.RampUp)"
-                # "-l", $csvFile
+                "-Jrampup=$($profile.RampUp)",
+                "-l", $csvFile
             ) 
             if ($profile.IsDuration) {
                 $jmeterArgs += " -Jduration=$($profile.Duration) -Jloops=-1"
