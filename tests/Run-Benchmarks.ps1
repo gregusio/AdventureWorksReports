@@ -1,13 +1,14 @@
 param (
     [string]$JMeterPath = "C:\apache-jmeter-5.6.3\bin\jmeter.bat",
-    [string]$AppPoolName = "DefaultAppPool"
+    [string]$AppPoolName = "DefaultAppPool",
+    [string]$Scenario = "Full" # All options: "Full", "DatasOff", "Ping"
 )
 
 $testsDir = $PSScriptRoot
 $repoRootDir = (Get-Item $testsDir).Parent.FullName 
 
 $testPlan = Join-Path $testsDir "test_plan.jmx"
-$resultsDir = Join-Path $testsDir "results"
+$resultsDir = Join-Path $testsDir "results\$Scenario" 
 $payloadsDir = Join-Path $testsDir "payloads"
 $dbContainerName = "adventureworks_db" 
 
@@ -57,11 +58,36 @@ $endpoints = @(
 )
 
 $profiles = @(
-    @{ Name="01_Bazowy"; VUsers=1; RampUp=1; Loops=100; IsDuration=$false },
-    @{ Name="02_NiskiRuch"; VUsers=20; RampUp=5; Loops=200; IsDuration=$false },
-    @{ Name="03_Obciazeniowy"; VUsers=100; RampUp=10; Duration=180; IsDuration=$true },
-    @{ Name="04_Stresowy"; VUsers=500; RampUp=50; Duration=180; IsDuration=$true }
+    @{ Name="01_Base"; VUsers=1; RampUp=1; Loops=100; IsDuration=$false },
+    @{ Name="02_LowTraffic"; VUsers=20; RampUp=5; Loops=200; IsDuration=$false },
+    @{ Name="03_Load"; VUsers=100; RampUp=10; Duration=180; IsDuration=$true },
+    @{ Name="04_Stressful"; VUsers=500; RampUp=50; Duration=180; IsDuration=$true }
 )
+
+if ($Scenario -eq "DatasOff") {
+    Write-Host "    [INFO] Running a script: DATAS OFF..." -ForegroundColor Yellow
+    
+    $profiles = @(
+        @{ Name="03_Load"; VUsers=100; RampUp=10; Duration=180; IsDuration=$true },
+        @{ Name="04_Stressful"; VUsers=500; RampUp=50; Duration=180; IsDuration=$true }
+    )
+}
+elseif ($Scenario -eq "Ping") {
+    Write-Host "    [INFO] Running a script: PING..." -ForegroundColor Yellow
+    
+    $endpoints = @(
+        @{ Name="Ping"; Path="/api/reports/ok"; Method="GET" } 
+    )
+
+    $profiles = @(
+        @{ Name="Max_Overhead_500"; VUsers=500; RampUp=5; Duration=120; IsDuration=$true }
+    )
+}
+
+if (-Not (Test-Path $resultsDir)) { 
+    New-Item -ItemType Directory -Path $resultsDir -Force | Out-Null 
+    Write-Host "    [INFO] A results directory has been created: $resultsDir" -ForegroundColor Green
+}
 
 function Clean-Environment {
     Write-Host "    [Cleanup] Killing lingering server processes (.exe)..." -ForegroundColor DarkYellow
